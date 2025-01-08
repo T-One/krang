@@ -115,8 +115,8 @@ def manage_container(action, container_name=None):
                         return f"Container '{container_name}' stopped successfully."
 
                     if action == "logs":
-                        logs = container.logs(stdout=True, stderr=True, tail=20)
-                        return "\n".join(line.decode().strip() for line in logs)
+                        logs = container.logs(stdout=True, stderr=True, tail=30)
+                        return "\n".join(line.decode().strip() for line in logs)[-1900:]
 
         return f"Container '{container_name}' not found or action '{action}' not applicable."
     except Exception as e:
