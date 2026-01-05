@@ -7,10 +7,23 @@ import math # Needed for format_bytes
 from podman import PodmanClient
 from podman.errors import NotFound
 
+import json
+
 # Constants
-URI = "unix:///run/podman/podman.sock"
-AUTHORIZED_GUILD_IDS = [1317809184221298769, 805070329588088862]
-AUTHORIZED_CHANNEL_IDS = [1319051370686582815, 1317812980074942484]
+# Load configuration
+try:
+    with open('config.json', 'r') as f:
+        config = json.load(f)
+except FileNotFoundError:
+    logging.error("config.json not found. Please create it.")
+    exit(1)
+except json.JSONDecodeError as e:
+    logging.error(f"Error parsing config.json: {e}")
+    exit(1)
+
+URI = config.get("podman_uri", "unix:///run/podman/podman.sock")
+AUTHORIZED_GUILD_IDS = config.get("authorized_guild_ids", [])
+AUTHORIZED_CHANNEL_IDS = config.get("authorized_channel_ids", [])
 
 def fetch_public_ip():
     """Fetch the public IP address using api.ipify.org."""
@@ -25,10 +38,12 @@ def fetch_public_ip():
 public_ip = fetch_public_ip()
 
 # Dictionary defining target containers to be managed by the application
-TARGET_CONTAINERS = {
-    # Example container setup (currently commented out)
-    # "minecraft": {"ip": PUBLIC_IP, "port": "27015", "password": "serverpasswort"},
-}
+TARGET_CONTAINERS = config.get("containers", {})
+
+# Process AUTO IP
+for name, data in TARGET_CONTAINERS.items():
+    if data.get("ip") == "AUTO":
+        data["ip"] = public_ip
 
 KRANG_QUOTES = [ # List of Krang quotes for random responses in the bot
     "I'm finally FREE!! The people of this planet will pay for what they've done to me.",

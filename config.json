@@ -1,0 +1,58 @@
+{
+    "authorized_guild_ids": [
+        123456789012345678,
+        987654321098765432
+    ],
+    "authorized_channel_ids": [
+        123456789012345678,
+        987654321098765432
+    ],
+    "podman_uri": "unix:///run/podman/podman.sock",
+    "containers": {
+        "abiotic-factor": {
+            "ip": "AUTO",
+            "port": "27015",
+            "password": "your_password_here"
+        },
+        "minecraft": {
+            "ip": "AUTO",
+            "port": "25565",
+            "password": "your_password_here"
+        },
+        "terraria": {
+            "ip": "AUTO",
+            "port": "7778",
+            "password": "your_password_here"
+        },
+        "project-zomboid": {
+            "ip": "AUTO",
+            "port": "16261",
+            "password": "your_password_here"
+        },
+        "satisfactory": {
+            "ip": "AUTO",
+            "port": "7779",
+            "password": ""
+        },
+        "valheim": {
+            "ip": "AUTO",
+            "port": "2456",
+            "password": "your_password_here"
+        },
+        "necesse": {
+            "ip": "AUTO",
+            "port": "14159",
+            "password": "your_password_here"
+        },
+        "counter-strike": {
+            "ip": "AUTO",
+            "port": "27016",
+            "password": "your_password_here"
+        },
+        "bf1942": {
+            "ip": "AUTO",
+            "port": "14567",
+            "password": "your_password_here"
+        }
+    }
+}
